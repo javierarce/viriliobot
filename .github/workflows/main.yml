@@ -28,4 +28,5 @@ jobs:
           KEY: ${{ secrets.SSHKEY }}
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
         with:
+          source: "."
           target: "/home/javier/viriliobot"
