@@ -34,5 +34,4 @@ jobs:
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
         with:
           strip_components: 1
-          source: "./dist/*"
-          target: "/home/javier/bicimap"
+          target: "/home/javier/viriliobot"
