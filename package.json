@@ -1,0 +1,22 @@
+{
+  "name": "txtnau",
+  "version": "0.0.1",
+  "description": "A bot that looks",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
+    "twit": "^2.2.11"
+  },
+  "engines": {
+    "node": "15.8.0"
+  },
+  "repository": {
+    "url": "https://github.com/javierarce/txtnau"
+  },
+  "license": "MIT"
+}
