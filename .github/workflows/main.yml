@@ -28,5 +28,4 @@ jobs:
           KEY: ${{ secrets.SSHKEY }}
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
         with:
-          strip_components: 1
           target: "/home/javier/viriliobot"
