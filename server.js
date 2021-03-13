@@ -4,6 +4,10 @@ require('dotenv').config({ path: __dirname + '/.env' })
 const fs = require('fs')
 const Twit = require('twit')
 
+const HTML = require('./lib/html')
+
+const TWEET_ENABLED = process.env.TWEET_ENABLED
+
 const TWITTER_CONFIG = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -26,6 +30,12 @@ const saveCount = (count) => {
   fs.writeFileSync('./count.txt', JSON.stringify(count))
 }
 
+const saveStatus = (status) => {
+  console.log(status)
+  fs.writeFileSync('./status.txt', JSON.stringify(status))
+  HTML.build()
+}
+
 const loadData = () => {
   return JSON.parse(fs.readFileSync('./data/data.json'))
 }
@@ -40,14 +50,19 @@ const init = () => {
   const word = data[count]
   const status = getStatus(word.c1, word.word)
 
-  tweet(status, (error, data, response) => {
-    if (!error) {
-      console.log(status)
-      saveCount(++count)
-    } else {
-      console.log(error)
-    }
-  })
+  if (TWEET_ENABLED) {
+    tweet(status, (error, data, response) => {
+      if (!error) {
+        saveCount(++count)
+        saveStatus(status)
+      } else {
+        console.log(error)
+      }
+    })
+
+  } else {
+    saveStatus(status)
+  }
 }
 
 init()
