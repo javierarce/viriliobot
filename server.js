@@ -6,7 +6,7 @@ const Twit = require('twit')
 
 const HTML = require('./lib/html')
 
-const TWEET_ENABLED = process.env.TWEET_ENABLED === 'true'
+const TWITTER_ENABLED = process.env.TWITTER_ENABLED === 'true'
 
 const TWITTER_CONFIG = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -54,7 +54,7 @@ const init = () => {
   const word = data[count]
   const status = getStatus(word.c1, word.word)
 
-  if (TWEET_ENABLED) {
+  if (TWITTER_ENABLED) {
     tweet(status, (error, data, response) => {
       if (!error) {
         saveCount(++count)
