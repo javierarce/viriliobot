@@ -31,9 +31,14 @@ const saveCount = (count) => {
 }
 
 const saveStatus = (status) => {
-  console.log(status)
-  fs.writeFileSync('./status.txt', JSON.stringify(status))
-  HTML.build()
+  fs.appendFile(`${__dirname}/status.txt`, `${status}\n`, (error) => {
+    if (error) {
+      console.log(error)
+    }
+    console.log(`Tweet saved: ${status}`)
+    HTML.build()
+  })
+
 }
 
 const loadData = () => {
