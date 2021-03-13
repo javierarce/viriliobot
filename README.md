@@ -1,6 +1,6 @@
 # The Paul Virilio Bot
 
-Watch it in action at [@viriliobot](https://twitter.com/viriliobot).
+Watch it in action at [@viriliobot](https://twitter.com/viriliobot) or read comfortably [here](https://viriliobot.javierarce.com).
 
 > When you invent the war, you also invent the warship.  
 > When you invent the passion, you also invent the passionflowers.  
