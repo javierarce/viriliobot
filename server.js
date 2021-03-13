@@ -31,7 +31,7 @@ const saveCount = (count) => {
 }
 
 const saveStatus = (status) => {
-  fs.appendFile(`${__dirname}/status.txt`, `${ status } `, (error) => {
+  fs.appendFile(`${__dirname}/status.txt`, `${ status }\n`, (error) => {
     if (error) {
       console.log(error)
     }
