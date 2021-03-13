@@ -6,7 +6,7 @@ const Twit = require('twit')
 
 const HTML = require('./lib/html')
 
-const TWEET_ENABLED = process.env.TWEET_ENABLED
+const TWEET_ENABLED = process.env.TWEET_ENABLED === 'true'
 
 const TWITTER_CONFIG = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -31,14 +31,13 @@ const saveCount = (count) => {
 }
 
 const saveStatus = (status) => {
-  fs.appendFile(`${__dirname}/status.txt`, `${status}\n`, (error) => {
+  fs.appendFile(`${__dirname}/status.txt`, `${ status } `, (error) => {
     if (error) {
       console.log(error)
     }
     console.log(`Tweet saved: ${status}`)
     HTML.build()
   })
-
 }
 
 const loadData = () => {
@@ -66,6 +65,7 @@ const init = () => {
     })
 
   } else {
+    saveCount(++count)
     saveStatus(status)
   }
 }
