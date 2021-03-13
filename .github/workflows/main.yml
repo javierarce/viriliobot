@@ -14,6 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
+      - uses: nodenv/actions/node-version
+        id: nodenv
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '15.8.0'
+      - run: node -v
+
       - name: Install
         uses: borales/actions-yarn@v2.0.0
         with:
