@@ -16,14 +16,10 @@ jobs:
 
       - name: Node
         uses: actions/setup-node@v1
+        id: nodenv
         with:
           node-version: '15.8.0'
-      - run: node -v
-
-      - name: Install
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install # will run `yarn install` command
+      - run: yarn
 
       - name: Copy file via scp
         uses: appleboy/scp-action@master
