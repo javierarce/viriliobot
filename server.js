@@ -4,12 +4,6 @@ require('dotenv').config({ path: __dirname + '/.env' })
 const fs = require('fs')
 const Twit = require('twit')
 
-let count = JSON.parse(fs.readFileSync('./count.txt'))
-let data = JSON.parse(fs.readFileSync('./data.json'))
-
-let word = data[count]
-let status = `When you invent the ${word.c1}, you also invent the ${word.word}.`
-
 const TWITTER_CONFIG = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -20,11 +14,40 @@ const TWITTER_CONFIG = {
 
 const T = new Twit(TWITTER_CONFIG)
 
-T.post('statuses/update', { status }, (error, data, response) => {
-  if (!error) {
-    console.log(status)
-    fs.writeFileSync('./count.txt', JSON.stringify(++count))
-  } else {
-    console.log(error)
-  }
-})
+const getStatus = (c1, word) => {
+  return `When you invent the ${ c1 }, you also invent the ${ word }.`
+}
+
+const loadCount = () => {
+  return JSON.parse(fs.readFileSync('./count.txt'))
+}
+
+const saveCount = (count) => {
+  fs.writeFileSync('./count.txt', JSON.stringify(count))
+}
+
+const loadData = () => {
+  return JSON.parse(fs.readFileSync('./data/data.json'))
+}
+
+const tweet = (status, callback) => {
+  T.post('statuses/update', { status }, callback)
+}
+
+const init = () => {
+  let count = loadCount()
+  const data = loadData()
+  const word = data[count]
+  const status = getStatus(word.c1, word.word)
+
+  tweet(status, (error, data, response) => {
+    if (!error) {
+      console.log(status)
+      saveCount(++count)
+    } else {
+      console.log(error)
+    }
+  })
+}
+
+init()
